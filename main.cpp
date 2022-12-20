@@ -4,11 +4,12 @@
 using namespace std;
 
 void displaymenu();
-double Calc_Total_Charge(double , double , double , double );
+double Calc_Total_Charge(double , double , double , double , double );
 double Calc_medcine_charge(double , int&);
 double Calc_surgery_charge(double , int&);
 double Calc_service_charge(double , int&);
 double Calc_hospitalstay_charge(double, int&);
+double Calc_fooddrink_charge(double , int&);
 
 int main()
 {
@@ -19,7 +20,7 @@ int main()
     {
         char exit_status = 'N';
 
-        double medcine_charge=0, surgery_charge=0, service_charge=0, hospitalstay_charge=0, Total_Charge=0;
+        double medcine_charge=0, surgery_charge=0, service_charge=0, hospitalstay_charge=0, fooddrink_charge=0, Total_Charge=0;
 
         int counter = 1;
 
@@ -55,8 +56,12 @@ int main()
                     hospitalstay_charge = Calc_hospitalstay_charge(hospitalstay_charge, counter);
                     break;
                 case 5:
+                    //food and drink
+                    fooddrink_charge = Calc_fooddrink_charge(fooddrink_charge, counter);
+                    break;
+                case 6:
                     //Total charges
-                    Total_Charge = Calc_Total_Charge(medcine_charge, surgery_charge, service_charge, hospitalstay_charge);
+                    Total_Charge = Calc_Total_Charge(medcine_charge, surgery_charge, service_charge, hospitalstay_charge, fooddrink_charge);
                     cout << "Total charges= RM"<< Total_Charge << endl;
                     cout << endl;
                     exit_status = 'Y';
@@ -103,7 +108,7 @@ int main()
 void displaymenu()
 {
     cout<<"Select your choice."<<endl;
-    cout<<" 1. Medcine\n 2. Surgery\n 3. Service\n 4. Hospital Stay\n 5. Exit (Total Charges)\n";
+    cout<<" 1. Medcine\n 2. Surgery\n 3. Service\n 4. Hospital Stay\n 5. Food and Drink\n 6. Exit (Total Charges)\n";
 }
 
 double Calc_medcine_charge(double medcine_charge, int &counter)
@@ -466,7 +471,96 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int &counter)
     return hospitalstay_charge;
 }
 
-double Calc_Total_Charge(double medcine_charge, double surgery_charge, double service_charge, double hospitalstay_charge)
+double Calc_fooddrink_charge(double fooddrink_charge, int&counter)
 {
-    return (medcine_charge + surgery_charge + service_charge + hospitalstay_charge);
+    int fooddrink_choice;
+    int amount;
+
+    do
+    {
+            if(cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+            }
+
+            cout<<"Select your choice."<<endl;
+            cout<<" 1. Chicken Rice\tRM8\n 2. Ginger Fish With Brown Rice\tRM12\n 3. Chicken Croissant\tRM6\n 4. Nasi Lemak\tRM4\n 5. Fish Fillet With Brown Rice\tRM9\n 6. Apple Juice\tRM3\n";
+            cin>> fooddrink_choice;
+            cout << endl;
+
+            if(fooddrink_choice!=1 && fooddrink_choice!=2 && fooddrink_choice!=3 && fooddrink_choice!=4 && fooddrink_choice!=5 && fooddrink_choice!=6)
+            {
+                cout << "Enter again."<<endl;
+            }
+    } while (fooddrink_choice!=1 && fooddrink_choice!=2 && fooddrink_choice!=3 && fooddrink_choice!=4 && fooddrink_choice!=5 && fooddrink_choice!=6);
+
+    do
+    {
+            if(cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+            }
+            
+            cout << "Enter amount."<<endl;
+            cin>>amount;
+            cout << endl;
+
+            if(amount<0 || cin.fail())
+            {
+                cout << "Enter again."<<endl;
+            }
+    } while (amount<0 || cin.fail());
+
+    double frequency = static_cast<double>(amount);
+            
+    switch(fooddrink_choice)
+    {
+            case 1:
+                cout << counter << ". Chicken Rice RM" << frequency*8 << endl;
+                fooddrink_charge = fooddrink_charge + frequency*8;
+                cout << endl;
+                counter++;
+                break;
+            case 2:
+                cout << counter << ". Ginger Fish With Brown Rice RM" << frequency*12 << endl;
+                fooddrink_charge = fooddrink_charge + frequency*12;
+                cout << endl;
+                counter++;
+                break;
+            case 3:
+                cout << counter << ". Chicken Croissant RM" << frequency*6 << endl;
+                fooddrink_charge = fooddrink_charge + frequency*6;
+                cout << endl;
+                counter++;
+                break;
+            case 4:
+                cout << counter << ". Nasi Lemak RM" << frequency*4 << endl;
+                fooddrink_charge = fooddrink_charge + frequency*4;
+                cout << endl;
+                counter++;
+                break;
+            case 5:
+                cout << counter << ". Fish Fillet With Brown Rice RM" << frequency*9 << endl;
+                fooddrink_charge = fooddrink_charge + frequency*9;
+                cout << endl;
+                counter++;
+                break;
+            case 6:
+                cout << counter << ". Apple Juice RM" << frequency*3 << endl;
+                fooddrink_charge = fooddrink_charge + frequency*3;
+                cout << endl;
+                counter++;
+                break;
+            default:
+                cout << "Enter again."<<endl;
+                break;
+    }
+    return fooddrink_charge;
+}
+
+double Calc_Total_Charge(double medcine_charge, double surgery_charge, double service_charge, double hospitalstay_charge, double fooddrink_charge)
+{
+    return (medcine_charge + surgery_charge + service_charge + hospitalstay_charge + fooddrink_charge);
 }
