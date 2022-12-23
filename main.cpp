@@ -115,7 +115,10 @@ int main()
 
                     if(number_item != (counter))
                     {
-                        cout<<"number_item not equal to counter-1"<<endl;
+                        cout << "Amount of item selected is not equal to number of item stated." << endl;
+                        cout << "Current calculation of charges will be canceled." << endl;
+                        cout << endl;
+                        exit_status = 'Y';
                         break;
                     }
 
