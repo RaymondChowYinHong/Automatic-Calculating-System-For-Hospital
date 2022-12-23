@@ -15,46 +15,118 @@ int main()
 
         double medcine_charge=0, surgery_charge=0, service_charge=0, hospitalstay_charge=0, fooddrink_charge=0, Total_Charge=0;
 
-        int counter = 1;
+        int counter = 0;
+        int number_item;
 
-        do{
-            int menu_choice;
-
+        do
+        {
             if(cin.fail())
             {
                 cin.clear();
                 cin.ignore();
             }
+            
+            cout << "How many item?"<<endl;
+            cin >> number_item;
+        } while (cin.fail());
 
-            displaymenu();
-            cin>> menu_choice;
-            cout << endl;
+        int menu_choice_array[number_item];
+        int submenu_choice_array[number_item];
+        double amount_array[number_item];
+   
+
+
+        do{
+            int menu_choice;
+            int submenu_choice;
+            double amount;
+
+            do
+            {
+                if(cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore();
+                }
+
+                displaymenu();
+                cin>> menu_choice;
+                cout << endl;
+
+            } while (cin.fail());
+
+            //menu_choice_array[counter] = menu_choice;
 
             switch(menu_choice)
             {
                 case 1:
                     //medcine
-                    medcine_charge = Calc_medcine_charge(medcine_charge, counter);
+                    menu_choice_array[counter] = menu_choice;
+                    medcine_charge = Calc_medcine_charge(medcine_charge, counter, submenu_choice, amount);
+                    submenu_choice_array[counter]= submenu_choice;
+                    amount_array[counter] = amount;
+                    cout<<submenu_choice_array[counter]<<endl;
+                    cout<<amount_array[counter]<<endl;
+                    counter++;
                     break;
                 case 2:
                     //surgery
-                    surgery_charge = Calc_surgery_charge(surgery_charge, counter);
+                    menu_choice_array[counter] = menu_choice;
+                    surgery_charge = Calc_surgery_charge(surgery_charge, counter, submenu_choice, amount);
+                    submenu_choice_array[counter]= submenu_choice;
+                    amount_array[counter] = amount;
+                    cout<<submenu_choice_array[counter]<<endl;
+                    cout<<amount_array[counter]<<endl;
+                    counter++;
                     break;
                 case 3:
                     //service
-                    service_charge = Calc_service_charge(service_charge, counter);
+                    menu_choice_array[counter] = menu_choice;
+                    service_charge = Calc_service_charge(service_charge, counter, submenu_choice, amount);
+                    submenu_choice_array[counter]= submenu_choice;
+                    amount_array[counter] = amount;
+                    cout<<submenu_choice_array[counter]<<endl;
+                    cout<<amount_array[counter]<<endl;
+                    counter++;
                     break;
                 case 4:
                     //hospital stay
-                    hospitalstay_charge = Calc_hospitalstay_charge(hospitalstay_charge, counter);
+                    menu_choice_array[counter] = menu_choice;
+                    hospitalstay_charge = Calc_hospitalstay_charge(hospitalstay_charge, counter, submenu_choice, amount);
+                    submenu_choice_array[counter]= submenu_choice;
+                    amount_array[counter] = amount;
+                    cout<<submenu_choice_array[counter]<<endl;
+                    cout<<amount_array[counter]<<endl;
+                    counter++;
                     break;
                 case 5:
                     //food and drink
-                    fooddrink_charge = Calc_fooddrink_charge(fooddrink_charge, counter);
+                    menu_choice_array[counter] = menu_choice;
+                    fooddrink_charge = Calc_fooddrink_charge(fooddrink_charge, counter, submenu_choice, amount);
+                    submenu_choice_array[counter]= submenu_choice;
+                    amount_array[counter] = amount;
+                     cout<<submenu_choice_array[counter]<<endl;
+                    cout<<amount_array[counter]<<endl;
+                    counter++;
                     break;
                 case 6:
                     //Total charges
                     Total_Charge = Calc_Total_Charge(medcine_charge, surgery_charge, service_charge, hospitalstay_charge, fooddrink_charge);
+
+                    if(number_item != (counter))
+                    {
+                        cout<<"number_item not equal to counter-1"<<endl;
+                        break;
+                    }
+
+                    for(size_t j = 0; j < number_item; j++)
+                    {
+                        menu_choice = menu_choice_array[j];
+                        submenu_choice = submenu_choice_array[j];
+                        amount = amount_array[j];
+                        Display_patient_item(menu_choice, submenu_choice, amount, j);
+                    }
+
                     cout << "Total charges= RM"<< Total_Charge << endl;
                     cout << endl;
                     exit_status = 'Y';
@@ -104,10 +176,10 @@ void displaymenu()
     cout<<" 1. Medcine\n 2. Surgery\n 3. Service\n 4. Hospital Stay\n 5. Food and Drink\n 6. Exit (Total Charges)\n";
 }
 
-double Calc_medcine_charge(double medcine_charge, int &counter)
+double Calc_medcine_charge(double medcine_charge, int counter, int &submenu_choice, double &amount)
 {
     int medcine_choice;
-    double amount;
+    double amount_medcine;
 
     do
     {
@@ -128,6 +200,8 @@ double Calc_medcine_charge(double medcine_charge, int &counter)
             }
     } while (medcine_choice!=1 && medcine_choice!=2 && medcine_choice!=3 && medcine_choice!=4 && medcine_choice!=5 && medcine_choice!=6);
 
+    submenu_choice = medcine_choice;
+
     do
     {
             if(cin.fail())
@@ -137,53 +211,48 @@ double Calc_medcine_charge(double medcine_charge, int &counter)
             }
             
             cout << "Enter amount."<<endl;
-            cin>>amount;
+            cin>> amount_medcine;
             cout << endl;
 
-            if(amount<0 || cin.fail())
+            if(amount_medcine <0 || cin.fail())
             {
                 cout << "Enter again."<<endl;
             }
-    } while (amount<0 || cin.fail());
+    } while (amount_medcine <0 || cin.fail());
+
+    amount = amount_medcine;
             
 
     switch(medcine_choice)
     {
             case 1:
-                cout << counter << ". Norvac(amlodipine)10 mg tablet RM" << amount*8 << endl;
+                cout << (counter+1) << ". Norvac(amlodipine)10 mg tablet RM" << amount*8 << endl;
                 medcine_charge = medcine_charge + amount*8;
                 cout << endl;
-                counter++;
                 break;
             case 2:
-                cout << counter << ". Lipitor (atorvastatin)20 mg tablet RM" << amount*7 << endl;
+                cout << (counter+1) << ". Lipitor (atorvastatin)20 mg tablet RM" << amount*7 << endl;
                 medcine_charge = medcine_charge + amount*7;
                 cout << endl;
-                counter++;
                 break;
             case 3:
-                cout << counter << ". Glucovance(metformin+glyburide) 5 mg tablet RM" << amount*2 << endl;
+                cout << (counter+1) << ". Glucovance(metformin+glyburide) 5 mg tablet RM" << amount*2 << endl;
                 medcine_charge = medcine_charge + amount*2;
                 cout << endl;
-                counter++;
                 break;
             case 4:
-                cout << counter << ". Diamicron(gliclazide)80 mg tablet RM" << amount*1 << endl;
+                cout << (counter+1) << ". Diamicron(gliclazide)80 mg tablet RM" << amount*1 << endl;
                 medcine_charge = medcine_charge + amount*1;
-                cout << endl;
-                counter++;
                 break;
             case 5:
-                cout << counter << ". Noten(atenolol)50 mg tablet RM" << amount*0.50 << endl;
+                cout << (counter+1) << ". Noten(atenolol)50 mg tablet RM" << amount*0.50 << endl;
                 medcine_charge = medcine_charge + amount*0.5;
                 cout << endl;
-                counter++;
                 break;
             case 6:
-                cout << counter << ". Ventolin 2.5 mg dose RM" << amount*4 << endl;
+                cout << (counter+1) << ". Ventolin 2.5 mg dose RM" << amount*4 << endl;
                 medcine_charge = medcine_charge + amount*4;
                 cout << endl;
-                counter++;
                 break;
             default:
                 cout << "Enter again."<<endl;
@@ -194,10 +263,10 @@ double Calc_medcine_charge(double medcine_charge, int &counter)
     return medcine_charge;   
 }
 
-double Calc_surgery_charge(double surgery_charge, int &counter)
+double Calc_surgery_charge(double surgery_charge, int counter, int &submenu_choice, double &amount)
 {
     int surgery_choice;
-    int amount;
+    int amount_surgery;
 
     do
     {
@@ -218,6 +287,8 @@ double Calc_surgery_charge(double surgery_charge, int &counter)
             }
     } while (surgery_choice!=1 && surgery_choice!=2 && surgery_choice!=3 && surgery_choice!=4 && surgery_choice!=5 && surgery_choice!=6);
 
+    submenu_choice = surgery_choice;
+
     do
     {
             if(cin.fail())
@@ -227,54 +298,49 @@ double Calc_surgery_charge(double surgery_charge, int &counter)
             }
             
             cout << "Enter frequency."<<endl;
-            cin>>amount;
+            cin>>amount_surgery;
             cout << endl;
 
-            if(amount<0 || cin.fail())
+            if(amount_surgery <0 || cin.fail())
             {
                 cout << "Enter again."<<endl;
             }
-    } while (amount<0 || cin.fail());
+    } while (amount_surgery <0 || cin.fail());
 
-    double frequency = static_cast<double>(amount);
+    double frequency = static_cast<double>(amount_surgery);
+    amount = frequency;
             
     switch(surgery_choice)
     {
             case 1:
-                cout << counter << ". Angiogram RM" << frequency*200 << endl;
+                cout << (counter+1) << ". Angiogram RM" << frequency*200 << endl;
                 surgery_charge = surgery_charge + frequency*200;
                 cout << endl;
-                counter++;
                 break;
             case 2:
-                cout << counter << ". Coronary Bypass RM" << frequency*4000 << endl;
+                cout << (counter+1) << ". Coronary Bypass RM" << frequency*4000 << endl;
                 surgery_charge = surgery_charge + frequency*4000;
                 cout << endl;
-                counter++;
                 break;
             case 3:
-                cout << counter << ". Knee Replacement Surgery RM" << frequency*10000 << endl;
+                cout << (counter+1) << ". Knee Replacement Surgery RM" << frequency*10000 << endl;
                 surgery_charge = surgery_charge + frequency*10000;
                 cout << endl;
-                counter++;
                 break;
             case 4:
-                cout << counter << ". Spine Surgery RM" << frequency*8000 << endl;
+                cout << (counter+1) << ". Spine Surgery RM" << frequency*8000 << endl;
                 surgery_charge = surgery_charge + frequency*8000;
                 cout << endl;
-                counter++;
                 break;
             case 5:
-                cout << counter << ". Kidney Stone RM" << frequency*3000 << endl;
+                cout << (counter+1) << ". Kidney Stone RM" << frequency*3000 << endl;
                 surgery_charge = surgery_charge + frequency*3000;
                 cout << endl;
-                counter++;
                 break;
             case 6:
-                cout << counter << ". Chemotherapy RM" << frequency*200 << endl;
+                cout << (counter+1) << ". Chemotherapy RM" << frequency*200 << endl;
                 surgery_charge = surgery_charge + frequency*200;
                 cout << endl;
-                counter++;
                 break;
             default:
                 cout << "Enter again."<<endl;
@@ -285,10 +351,10 @@ double Calc_surgery_charge(double surgery_charge, int &counter)
     return surgery_charge;
 }
 
-double Calc_service_charge(double service_charge, int &counter)
+double Calc_service_charge(double service_charge, int counter, int &submenu_choice, double &amount)
 {
     int service_choice;
-    int amount;
+    int amount_service;
 
     do
     {
@@ -309,6 +375,8 @@ double Calc_service_charge(double service_charge, int &counter)
             }
     } while (service_choice!=1 && service_choice!=2 && service_choice!=3 && service_choice!=4 && service_choice!=5 && service_choice!=6);
 
+    submenu_choice = service_choice;
+
     do
     {
             if(cin.fail())
@@ -318,54 +386,49 @@ double Calc_service_charge(double service_charge, int &counter)
             }
             
             cout << "Enter frequency."<<endl;
-            cin>>amount;
+            cin>>amount_service;
             cout << endl;
 
-            if(amount<0 || cin.fail())
+            if(amount_service <0 || cin.fail())
             {
                 cout << "Enter again."<<endl;
             }
-    } while (amount<0 || cin.fail());
+    } while (amount_service <0 || cin.fail());
 
-    double frequency = static_cast<double>(amount);
+    double frequency = static_cast<double>(amount_service);
+    amount = frequency;
             
     switch(service_choice)
     {
             case 1:
-                cout << counter << ". Consultation RM" << frequency*1 << endl;
+                cout << (counter+1) << ". Consultation RM" << frequency*1 << endl;
                 service_charge = service_charge + frequency*1;
                 cout << endl;
-                counter++;
                 break;
             case 2:
-                cout << counter << ". X_Ray RM" << frequency*35 << endl;
+                cout << (counter+1) << ". X_Ray RM" << frequency*35 << endl;
                 service_charge = service_charge + frequency*35;
                 cout << endl;
-                counter++;
                 break;
             case 3:
-                cout << counter << ". Ultrasound RM" << frequency*10 << endl;
+                cout << (counter+1) << ". Ultrasound RM" << frequency*10 << endl;
                 service_charge = service_charge + frequency*10;
                 cout << endl;
-                counter++;
                 break;
             case 4:
-                cout << counter << ". Angiography RM" << frequency*75 << endl;
+                cout << (counter+1) << ". Angiography RM" << frequency*75 << endl;
                 service_charge = service_charge + frequency*75;
                 cout << endl;
-                counter++;
                 break;
             case 5:
-                cout << counter << ". Blood Test RM" << frequency*1 << endl;
+                cout << (counter+1) << ". Blood Test RM" << frequency*1 << endl;
                 service_charge = service_charge + frequency*1;
                 cout << endl;
-                counter++;
                 break;
             case 6:
-                cout << counter << ". CT Scan RM" << frequency*450 << endl;
+                cout << (counter+1) << ". CT Scan RM" << frequency*450 << endl;
                 service_charge = service_charge + frequency*450;
                 cout << endl;
-                counter++;
                 break;
             default:
                 cout << "Enter again."<<endl;
@@ -375,10 +438,10 @@ double Calc_service_charge(double service_charge, int &counter)
     return service_charge;
 }
 
-double Calc_hospitalstay_charge(double hospitalstay_charge, int &counter)
+double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &submenu_choice, double &amount)
 {
     int hospitalstay_choice;
-    int amount;
+    int amount_hospitalstay;
 
     do
     {
@@ -398,7 +461,8 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int &counter)
                 cout << "Enter again."<<endl;
             }
     } while (hospitalstay_choice!=1 && hospitalstay_choice!=2 && hospitalstay_choice!=3 && hospitalstay_choice!=4 && hospitalstay_choice!=5 && hospitalstay_choice!=6);
-
+    
+    submenu_choice = hospitalstay_choice;
     do
     {
             if(cin.fail())
@@ -408,54 +472,49 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int &counter)
             }
             
             cout << "Enter frequency(day)."<<endl;
-            cin>>amount;
+            cin>>amount_hospitalstay;
             cout << endl;
 
-            if(amount<0 || cin.fail())
+            if(amount_hospitalstay <0 || cin.fail())
             {
                 cout << "Enter again."<<endl;
             }
-    } while (amount<0 || cin.fail());
+    } while (amount_hospitalstay <0 || cin.fail());
 
-    double frequency = static_cast<double>(amount);
+    double frequency = static_cast<double>(amount_hospitalstay);
+    amount = frequency;
             
     switch(hospitalstay_choice)
     {
             case 1:
-                cout << counter << ". ICU RM" << frequency*265 << endl;
+                cout << (counter+1) << ". ICU RM" << frequency*265 << endl;
                 hospitalstay_charge = hospitalstay_charge + frequency*265;
                 cout << endl;
-                counter++;
                 break;
             case 2:
-                cout << counter << ". HDU RM" << frequency*185 << endl;
+                cout << (counter+1) << ". HDU RM" << frequency*185 << endl;
                 hospitalstay_charge = hospitalstay_charge + frequency*185;
                 cout << endl;
-                counter++;
                 break;
             case 3:
-                cout << counter << ". Single Deluxe RM" << frequency*600 << endl;
+                cout << (counter+1) << ". Single Deluxe RM" << frequency*600 << endl;
                 hospitalstay_charge = hospitalstay_charge + frequency*600;
                 cout << endl;
-                counter++;
                 break;
             case 4:
-                cout << counter << ". Single Standard RM" << frequency*300 << endl;
+                cout << (counter+1) << ". Single Standard RM" << frequency*300 << endl;
                 hospitalstay_charge = hospitalstay_charge + frequency*300;
                 cout << endl;
-                counter++;
                 break;
             case 5:
-                cout << counter << ". Double Bedded RM" << frequency*160 << endl;
+                cout << (counter+1) << ". Double Bedded RM" << frequency*160 << endl;
                 hospitalstay_charge = hospitalstay_charge + frequency*160;
                 cout << endl;
-                counter++;
                 break;
             case 6:
-                cout << counter << ". 4-Bedded RM" << frequency*120 << endl;
+                cout << (counter+1) << ". 4-Bedded RM" << frequency*120 << endl;
                 hospitalstay_charge = hospitalstay_charge + frequency*120;
                 cout << endl;
-                counter++;
                 break;
             default:
                 cout << "Enter again."<<endl;
@@ -464,10 +523,10 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int &counter)
     return hospitalstay_charge;
 }
 
-double Calc_fooddrink_charge(double fooddrink_charge, int&counter)
+double Calc_fooddrink_charge(double fooddrink_charge, int counter, int &submenu_choice, double &amount)
 {
     int fooddrink_choice;
-    int amount;
+    int amount_fooddrink;
 
     do
     {
@@ -488,6 +547,8 @@ double Calc_fooddrink_charge(double fooddrink_charge, int&counter)
             }
     } while (fooddrink_choice!=1 && fooddrink_choice!=2 && fooddrink_choice!=3 && fooddrink_choice!=4 && fooddrink_choice!=5 && fooddrink_choice!=6);
 
+    submenu_choice = fooddrink_choice;
+
     do
     {
             if(cin.fail())
@@ -497,54 +558,49 @@ double Calc_fooddrink_charge(double fooddrink_charge, int&counter)
             }
             
             cout << "Enter amount."<<endl;
-            cin>>amount;
+            cin>>amount_fooddrink;
             cout << endl;
 
-            if(amount<0 || cin.fail())
+            if(amount_fooddrink <0 || cin.fail())
             {
                 cout << "Enter again."<<endl;
             }
-    } while (amount<0 || cin.fail());
+    } while (amount_fooddrink <0 || cin.fail());
 
-    double frequency = static_cast<double>(amount);
+    double frequency = static_cast<double>(amount_fooddrink);
+    amount = frequency;
             
     switch(fooddrink_choice)
     {
             case 1:
-                cout << counter << ". Chicken Rice RM" << frequency*8 << endl;
+                cout << (counter+1) << ". Chicken Rice RM" << frequency*8 << endl;
                 fooddrink_charge = fooddrink_charge + frequency*8;
                 cout << endl;
-                counter++;
                 break;
             case 2:
-                cout << counter << ". Ginger Fish With Brown Rice RM" << frequency*12 << endl;
+                cout << (counter+1) << ". Ginger Fish With Brown Rice RM" << frequency*12 << endl;
                 fooddrink_charge = fooddrink_charge + frequency*12;
                 cout << endl;
-                counter++;
                 break;
             case 3:
-                cout << counter << ". Chicken Croissant RM" << frequency*6 << endl;
+                cout << (counter+1) << ". Chicken Croissant RM" << frequency*6 << endl;
                 fooddrink_charge = fooddrink_charge + frequency*6;
                 cout << endl;
-                counter++;
                 break;
             case 4:
-                cout << counter << ". Nasi Lemak RM" << frequency*4 << endl;
+                cout << (counter+1) << ". Nasi Lemak RM" << frequency*4 << endl;
                 fooddrink_charge = fooddrink_charge + frequency*4;
                 cout << endl;
-                counter++;
                 break;
             case 5:
-                cout << counter << ". Fish Fillet With Brown Rice RM" << frequency*9 << endl;
+                cout << (counter+1) << ". Fish Fillet With Brown Rice RM" << frequency*9 << endl;
                 fooddrink_charge = fooddrink_charge + frequency*9;
                 cout << endl;
-                counter++;
                 break;
             case 6:
-                cout << counter << ". Apple Juice RM" << frequency*3 << endl;
+                cout << (counter+1) << ". Apple Juice RM" << frequency*3 << endl;
                 fooddrink_charge = fooddrink_charge + frequency*3;
                 cout << endl;
-                counter++;
                 break;
             default:
                 cout << "Enter again."<<endl;
@@ -556,4 +612,166 @@ double Calc_fooddrink_charge(double fooddrink_charge, int&counter)
 double Calc_Total_Charge(double medcine_charge, double surgery_charge, double service_charge, double hospitalstay_charge, double fooddrink_charge)
 {
     return (medcine_charge + surgery_charge + service_charge + hospitalstay_charge + fooddrink_charge);
+}
+
+void Display_patient_item(int menu_choice, int submenu_choice, double amount, size_t j )
+{
+    if(menu_choice == 1)
+    {
+        if(submenu_choice == 1)
+        {
+            cout << (j+1) << ". Norvac(amlodipine)10 mg tablet RM8*" << amount << "= RM" << 8*amount << endl;
+        }
+        else if(submenu_choice == 2)
+        {
+            cout << (j+1) << ". Lipitor (atorvastatin)20 mg tablet RM7*" << amount << "= RM" << 7*amount << endl;
+        }
+        else if(submenu_choice ==3)
+        {
+            cout << (j+1) << ". Glucovance(metformin+glyburide) 5 mg tablet RM2*" << amount << "= RM" << 2*amount << endl;
+        }
+        else if(submenu_choice == 4)
+        {
+            cout << (j+1) << ". Diamicron(gliclazide)80 mg tablet RM1*" << amount << "= RM" << 1*amount << endl;
+        }
+        else if(submenu_choice == 5)
+        {
+            cout << (j+1) << ". Noten(atenolol)50 mg tablet RM0.50*" << amount << "= RM" << 0.5*amount << endl;
+        }
+        else if(submenu_choice == 6)
+        {
+            cout << (j+1) << ". Ventolin 2.5 mg dose RM4*" << amount << "= RM" << 4*amount << endl;
+        }
+        else
+        {
+            cout << "Something is wrong, please contact the IT department." << endl;
+        }
+
+    }
+    else if(menu_choice == 2)
+    {
+        if(submenu_choice == 1)
+        {
+            cout << (j+1) << ". Angiogram RM200*" << amount << "= RM" << 200*amount << endl;
+        }
+        else if(submenu_choice == 2)
+        {
+            cout << (j+1) << ". Coronary Bypass RM4000*" << amount << "= RM" << 4000*amount << endl;
+        }
+        else if(submenu_choice == 3)
+        {
+            cout << (j+1) << ". Knee Replacement Surgery RM10000*" << amount << "= RM" << 10000*amount << endl;
+        }
+        else if(submenu_choice == 4)
+        {
+            cout << (j+1) << ". Spine Surgery RM8000*" << amount << "= RM" << 8000*amount << endl;
+        }
+        else if(submenu_choice == 5)
+        {
+            cout << (j+1) << ". Kidney Stone RM3000*" << amount << "= RM" << 3000*amount << endl;
+
+        }
+        else if(submenu_choice == 6)
+        {
+            cout << (j+1) << ". Chemotherapy RM200*" << amount << "= RM" << 200*amount << endl;
+        }
+        else
+        {
+            cout << "Something is wrong, please contact the IT department." << endl;
+        }
+    }
+    else if(menu_choice == 3)
+    {
+        if(submenu_choice == 1)
+        {
+            cout << (j+1) << ". Consultation RM1*" << amount << "= RM" << 1*amount << endl;
+        }
+        else if(submenu_choice == 2)
+        {
+            cout << (j+1) << ". X-Ray RM35*" << amount << "= RM" << 35*amount << endl;
+        }
+        else if(submenu_choice == 3)
+        {
+            cout << (j+1) << ". Ultrasound RM10*" << amount << "= RM" << 10*amount << endl;
+        }
+        else if(submenu_choice == 4)
+        {
+            cout << (j+1) << ". Angiography RM75*" << amount << "= RM" << 75*amount << endl;
+        }
+        else if(submenu_choice == 5)
+        {
+            cout << (j+1) << ". Blood Test RM1*" << amount << "= RM" << 1*amount << endl;
+        }
+        else if(submenu_choice == 6)
+        {
+            cout << (j+1) << ". CT Scan RM450*" << amount << "= RM" << 450*amount << endl;
+        }
+        else
+        {
+            cout << "Something is wrong, please contact the IT department." << endl;
+        }
+    }
+    else if(menu_choice == 4)
+    {
+        if(submenu_choice == 1)
+        {
+            cout << (j+1) << ". ICU RM265*" << amount << "= RM" << 265*amount << endl;
+        }
+        else if(submenu_choice == 2)
+        {
+            cout << (j+1) << ". HDU RM185*" << amount << "= RM" << 185*amount << endl;
+        }
+        else if(submenu_choice == 3)
+        {
+            cout << (j+1) << ". Single Deluxe RM600*" << amount << "= RM" << 600*amount << endl;
+        }
+        else if(submenu_choice == 4)
+        {
+            cout << (j+1) << ". Single Standard RM300*" << amount << "= RM" << 300*amount << endl;
+        }
+        else if(submenu_choice == 5)
+        {
+            cout << (j+1) << ". Double Bedded RM160*" << amount << "= RM" << 160*amount << endl;
+        }
+        else if(submenu_choice == 6)
+        {
+            cout << (j+1) << ". 4-Bedded RM120*" << amount << "= RM" << 120*amount << endl;
+        }
+        else
+        {
+            cout << "Something is wrong, please contact the IT department." << endl;
+        }
+    }
+    else if(menu_choice == 5)
+    {
+        if(submenu_choice == 1)
+        {
+            cout << (j+1) << ". Chicken Rice RM8*" << amount << "= RM" << 8*amount << endl;
+        }
+        else if(submenu_choice == 2)
+        {
+            cout << (j+1) << ". Ginger Fish With Brown Rice RM12*" << amount << "= RM" << 12*amount << endl;
+        }
+        else if(submenu_choice == 3)
+        {
+            cout << (j+1) << ". Chicken Croissant RM6*" << amount << "= RM" << 6*amount << endl;
+        }
+        else if(submenu_choice == 4)
+        {
+            cout << (j+1) << ". Nasi Lemak RM4*" << amount << "= RM" << 4*amount << endl;
+        }
+        else if(submenu_choice == 5)
+        {
+            cout << (j+1) << ". Fish Fillet With Brown Rice RM9*" << amount << "= RM" << 9*amount << endl;
+        }
+        else if(submenu_choice == 6)
+        {
+            cout << (j+1) << ". Apple Juice RM3*" << amount << "= RM" << 3*amount << endl;
+        }
+        else
+        {
+            cout << "Something is wrong, please contact the IT department." << endl;
+        }
+    }
+
 }
