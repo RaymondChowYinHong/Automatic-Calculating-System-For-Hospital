@@ -1,5 +1,6 @@
-//create food function
+// use class and capsulation
 //create funtion to store patient disease, charges, name and ID
+// put function into other file
 #include <iostream>
 #include "main.hpp"
 using namespace std;
@@ -49,13 +50,11 @@ int main()
                     cin.ignore();
                 }
 
-                displaymenu();
+                display_menu();
                 cin>> menu_choice;
                 cout << endl;
 
             } while (cin.fail());
-
-            //menu_choice_array[counter] = menu_choice;
 
             switch(menu_choice)
             {
@@ -65,8 +64,8 @@ int main()
                     medcine_charge = Calc_medcine_charge(medcine_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
-                    cout<<submenu_choice_array[counter]<<endl;
-                    cout<<amount_array[counter]<<endl;
+                    //cout<<submenu_choice_array[counter]<<endl;
+                    //cout<<amount_array[counter]<<endl;
                     counter++;
                     break;
                 case 2:
@@ -75,8 +74,8 @@ int main()
                     surgery_charge = Calc_surgery_charge(surgery_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
-                    cout<<submenu_choice_array[counter]<<endl;
-                    cout<<amount_array[counter]<<endl;
+                    //cout<<submenu_choice_array[counter]<<endl;
+                    //cout<<amount_array[counter]<<endl;
                     counter++;
                     break;
                 case 3:
@@ -85,8 +84,8 @@ int main()
                     service_charge = Calc_service_charge(service_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
-                    cout<<submenu_choice_array[counter]<<endl;
-                    cout<<amount_array[counter]<<endl;
+                    //cout<<submenu_choice_array[counter]<<endl;
+                    //cout<<amount_array[counter]<<endl;
                     counter++;
                     break;
                 case 4:
@@ -95,8 +94,8 @@ int main()
                     hospitalstay_charge = Calc_hospitalstay_charge(hospitalstay_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
-                    cout<<submenu_choice_array[counter]<<endl;
-                    cout<<amount_array[counter]<<endl;
+                    //cout<<submenu_choice_array[counter]<<endl;
+                    //cout<<amount_array[counter]<<endl;
                     counter++;
                     break;
                 case 5:
@@ -105,14 +104,12 @@ int main()
                     fooddrink_charge = Calc_fooddrink_charge(fooddrink_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
-                     cout<<submenu_choice_array[counter]<<endl;
-                    cout<<amount_array[counter]<<endl;
+                    //cout<<submenu_choice_array[counter]<<endl;
+                    //cout<<amount_array[counter]<<endl;
                     counter++;
                     break;
                 case 6:
                     //Total charges
-                    Total_Charge = Calc_Total_Charge(medcine_charge, surgery_charge, service_charge, hospitalstay_charge, fooddrink_charge);
-
                     if(number_item != (counter))
                     {
                         cout << "Amount of item selected is not equal to number of item stated." << endl;
@@ -130,6 +127,7 @@ int main()
                         Display_patient_item(menu_choice, submenu_choice, amount, j);
                     }
 
+                    Total_Charge = Calc_Total_Charge(medcine_charge, surgery_charge, service_charge, hospitalstay_charge, fooddrink_charge);
                     cout << "Total charges= RM"<< Total_Charge << endl;
                     cout << endl;
                     exit_status = 'Y';
@@ -173,10 +171,16 @@ int main()
     return 0;
 }
 
-void displaymenu()
+void display_menu()
 {
     cout<<"Select your choice."<<endl;
     cout<<" 1. Medcine\n 2. Surgery\n 3. Service\n 4. Hospital Stay\n 5. Food and Drink\n 6. Exit (Total Charges)\n";
+}
+
+void display_medcine_menu()
+{
+    cout<<"Select your choice."<<endl;
+    cout<<" 1. Norvac(amlodipine)10 mg tablet \tRM8\n 2. Lipitor (atorvastatin)20 mg tablet \tRM7\n 3. Glucovance(metformin+glyburide) 5 mg tablet \tRM2\n 4. Diamicron(gliclazide)80 mg tablet \tRM1\n 5. Noten(atenolol)50 mg tablet \tRM0.50\n 6. Ventolin 2.5 mg dose \tRM4\n";
 }
 
 double Calc_medcine_charge(double medcine_charge, int counter, int &submenu_choice, double &amount)
@@ -192,8 +196,7 @@ double Calc_medcine_charge(double medcine_charge, int counter, int &submenu_choi
                 cin.ignore();
             }
 
-            cout<<"Select your choice."<<endl;
-            cout<<" 1. Norvac(amlodipine)10 mg tablet \tRM8\n 2. Lipitor (atorvastatin)20 mg tablet \tRM7\n 3. Glucovance(metformin+glyburide) 5 mg tablet \tRM2\n 4. Diamicron(gliclazide)80 mg tablet \tRM1\n 5. Noten(atenolol)50 mg tablet \tRM0.50\n 6. Ventolin 2.5 mg dose \tRM4\n";
+            display_medcine_menu();
             cin>> medcine_choice;
             cout << endl;
 
@@ -266,6 +269,12 @@ double Calc_medcine_charge(double medcine_charge, int counter, int &submenu_choi
     return medcine_charge;   
 }
 
+void display_surgery_menu()
+{
+    cout<<"Select your choice."<<endl;
+    cout<<" 1. Angiogram\tRM200\n 2. Coronary Bypass\tRM4000\n 3. Knee Replacement Surgery\tRM10000\n 4. Spine Surgery\tRM8000\n 5. Kidney Stone\tRM3000\n 6. Chemotherapy\tRM200\n";
+}
+
 double Calc_surgery_charge(double surgery_charge, int counter, int &submenu_choice, double &amount)
 {
     int surgery_choice;
@@ -278,9 +287,8 @@ double Calc_surgery_charge(double surgery_charge, int counter, int &submenu_choi
                 cin.clear();
                 cin.ignore();
             }
-
-            cout<<"Select your choice."<<endl;
-            cout<<" 1. Angiogram\tRM200\n 2. Coronary Bypass\tRM4000\n 3. Knee Replacement Surgery\tRM10000\n 4. Spine Surgery\tRM8000\n 5. Kidney Stone\tRM3000\n 6. Chemotherapy\tRM200\n";
+            
+            display_surgery_menu();
             cin>> surgery_choice;
             cout << endl;
 
@@ -354,6 +362,12 @@ double Calc_surgery_charge(double surgery_charge, int counter, int &submenu_choi
     return surgery_charge;
 }
 
+void display_service_menu()
+{
+    cout<<"Select your choice."<<endl;
+    cout<<" 1. Consultation\tRM1\n 2. X-Ray\tRM35\n 3. Ultrasound\tRM10\n 4. Angiography\tRM75\n 5. Blood Test\tRM1\n 6. CT Scan\tRM450\n";
+}
+
 double Calc_service_charge(double service_charge, int counter, int &submenu_choice, double &amount)
 {
     int service_choice;
@@ -366,9 +380,8 @@ double Calc_service_charge(double service_charge, int counter, int &submenu_choi
                 cin.clear();
                 cin.ignore();
             }
-
-            cout<<"Select your choice."<<endl;
-            cout<<" 1. Consultation\tRM1\n 2. X-Ray\tRM35\n 3. Ultrasound\tRM10\n 4. Angiography\tRM75\n 5. Blood Test\tRM1\n 6. CT Scan\tRM450\n";
+            
+            display_service_menu();
             cin>> service_choice;
             cout << endl;
 
@@ -441,6 +454,12 @@ double Calc_service_charge(double service_charge, int counter, int &submenu_choi
     return service_charge;
 }
 
+void display_hospitalstay_menu()
+{
+    cout<<"Select your choice."<<endl;
+    cout<<" 1. ICU\tRM265\n 2. HDU\tRM185\n 3. Single Deluxe\tRM600\n 4. Single Standard\tRM300\n 5. Double Bedded\tRM160\n 6. 4-Bedded\tRM120\n";
+}
+
 double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &submenu_choice, double &amount)
 {
     int hospitalstay_choice;
@@ -454,8 +473,7 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &su
                 cin.ignore();
             }
 
-            cout<<"Select your choice."<<endl;
-            cout<<" 1. ICU\tRM265\n 2. HDU\tRM185\n 3. Single Deluxe\tRM600\n 4. Single Standard\tRM300\n 5. Double Bedded\tRM160\n 6. 4-Bedded\tRM120\n";
+            display_hospitalstay_menu();
             cin>> hospitalstay_choice;
             cout << endl;
 
@@ -526,6 +544,12 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &su
     return hospitalstay_charge;
 }
 
+void display_fooddrink_menu()
+{
+    cout<<"Select your choice."<<endl;
+    cout<<" 1. Chicken Rice\tRM8\n 2. Ginger Fish With Brown Rice\tRM12\n 3. Chicken Croissant\tRM6\n 4. Nasi Lemak\tRM4\n 5. Fish Fillet With Brown Rice\tRM9\n 6. Apple Juice\tRM3\n";
+}
+
 double Calc_fooddrink_charge(double fooddrink_charge, int counter, int &submenu_choice, double &amount)
 {
     int fooddrink_choice;
@@ -539,8 +563,7 @@ double Calc_fooddrink_charge(double fooddrink_charge, int counter, int &submenu_
                 cin.ignore();
             }
 
-            cout<<"Select your choice."<<endl;
-            cout<<" 1. Chicken Rice\tRM8\n 2. Ginger Fish With Brown Rice\tRM12\n 3. Chicken Croissant\tRM6\n 4. Nasi Lemak\tRM4\n 5. Fish Fillet With Brown Rice\tRM9\n 6. Apple Juice\tRM3\n";
+            display_fooddrink_menu();
             cin>> fooddrink_choice;
             cout << endl;
 
