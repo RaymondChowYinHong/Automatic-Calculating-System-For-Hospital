@@ -1,6 +1,6 @@
-// use class and capsulation
+// use class , array in class and capsulation
 //create funtion to store patient disease, charges, name and ID
-// put function into other file
+
 #include <iostream>
 #include "main.hpp"
 #include "mainmenu.hpp"
