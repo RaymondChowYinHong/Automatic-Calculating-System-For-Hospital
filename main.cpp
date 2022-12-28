@@ -635,11 +635,6 @@ double Calc_fooddrink_charge(double fooddrink_charge, int counter, int &submenu_
     return fooddrink_charge;
 }
 
-double Calc_Total_Charge(double medcine_charge, double surgery_charge, double service_charge, double hospitalstay_charge, double fooddrink_charge)
-{
-    return (medcine_charge + surgery_charge + service_charge + hospitalstay_charge + fooddrink_charge);
-}
-
 void Display_patient_item(int menu_choice, int submenu_choice, double amount, size_t j )
 {
     if(menu_choice == 1)
@@ -800,4 +795,9 @@ void Display_patient_item(int menu_choice, int submenu_choice, double amount, si
         }
     }
 
+}
+
+double Calc_Total_Charge(double medcine_charge, double surgery_charge, double service_charge, double hospitalstay_charge, double fooddrink_charge)
+{
+    return (medcine_charge + surgery_charge + service_charge + hospitalstay_charge + fooddrink_charge);
 }
