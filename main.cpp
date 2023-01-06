@@ -16,16 +16,67 @@ using namespace std;
 class Person
 {
     public:
-        // int menu_choice;
-        // int submenu_choice;
-        // double amount;
+        void set_medcine_charge(double charge)
+        {
+            medcine_charge = charge;
+        }
+        double get_medcine_charge()
+        {
+            return medcine_charge;
+        }
+
+        void set_surgery_charge(double charge)
+        {
+            surgery_charge = charge;
+        }
+        double get_surgery_charge()
+        {
+            return surgery_charge;
+        }
+
+        void set_service_charge(double charge)
+        {
+            service_charge = charge;
+        }
+        double get_service_charge()
+        {
+            return service_charge;
+        }
+
+        void set_hospitalstay_charge(double charge)
+        {
+            hospitalstay_charge = charge;
+        }
+        double get_hospitalstay_charge()
+        {
+            return hospitalstay_charge;
+        }
+
+        void set_fooddrink_charge(double charge)
+        {
+            fooddrink_charge = charge;
+        }
+        double get_fooddrink_charge()
+        {
+            return fooddrink_charge;
+        }
+
+        void set_Total_Charge(double charge)
+        {
+            Total_Charge = charge;
+        }
+        double get_Total_Charge()
+        {
+            return Total_Charge;
+        }
+    
+    private:
         double medcine_charge=0;
         double surgery_charge=0;
         double service_charge=0;
         double hospitalstay_charge=0;
         double fooddrink_charge=0;
         double Total_Charge=0;
-
 };
 
 int main()
@@ -81,12 +132,15 @@ int main()
 
             } while (cin.fail());
 
+            int charge=0;
+
             switch(menu_choice)
             {
                 case 1:
                     //medcine
                     menu_choice_array[counter] = menu_choice;
-                    Patient.medcine_charge = Calc_medcine_charge(Patient.medcine_charge, counter, submenu_choice, amount);
+                    charge = Calc_medcine_charge(Patient.get_medcine_charge(), counter, submenu_choice, amount);
+                    Patient.set_medcine_charge(charge);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -96,7 +150,8 @@ int main()
                 case 2:
                     //surgery
                     menu_choice_array[counter] = menu_choice;
-                    Patient.surgery_charge = Calc_surgery_charge(Patient.surgery_charge, counter, submenu_choice, amount);
+                    charge = Calc_surgery_charge(Patient.get_surgery_charge(), counter, submenu_choice, amount);
+                    Patient.set_surgery_charge(charge);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -106,7 +161,8 @@ int main()
                 case 3:
                     //service
                     menu_choice_array[counter] = menu_choice;
-                    Patient.service_charge = Calc_service_charge(Patient.service_charge, counter, submenu_choice, amount);
+                    charge = Calc_service_charge(Patient.get_service_charge(), counter, submenu_choice, amount);
+                    Patient.set_service_charge(charge);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -116,7 +172,8 @@ int main()
                 case 4:
                     //hospital stay
                     menu_choice_array[counter] = menu_choice;
-                    Patient.hospitalstay_charge = Calc_hospitalstay_charge(Patient.hospitalstay_charge, counter, submenu_choice, amount);
+                    charge = Calc_hospitalstay_charge(Patient.get_hospitalstay_charge(), counter, submenu_choice, amount);
+                    Patient.set_hospitalstay_charge(charge);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -126,7 +183,8 @@ int main()
                 case 5:
                     //food and drink
                     menu_choice_array[counter] = menu_choice;
-                    Patient.fooddrink_charge = Calc_fooddrink_charge(Patient.fooddrink_charge, counter, submenu_choice, amount);
+                    charge = Calc_fooddrink_charge(Patient.get_fooddrink_charge(), counter, submenu_choice, amount);
+                    Patient.set_fooddrink_charge(charge);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -152,8 +210,9 @@ int main()
                         Display_patient_item(menu_choice, submenu_choice, amount, j);
                     }
 
-                    Patient.Total_Charge = Calc_Total_Charge(Patient.medcine_charge, Patient.surgery_charge, Patient.service_charge, Patient.hospitalstay_charge, Patient.fooddrink_charge);
-                    cout << "Total charges= RM"<< Patient.Total_Charge << endl;
+                    charge = Calc_Total_Charge(Patient.get_medcine_charge(), Patient.get_surgery_charge(), Patient.get_service_charge(), Patient.get_hospitalstay_charge(), Patient.get_fooddrink_charge());
+                    Patient.set_Total_Charge(charge);
+                    cout << "Total charges= RM"<< Patient.get_Total_Charge() << endl;
                     cout << endl;
                     exit_status = 'Y';
                     break;
