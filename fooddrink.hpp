@@ -8,7 +8,7 @@ using namespace std;
 void display_fooddrink_menu()
 {
     cout<<"Select your choice."<<endl;
-    cout<<" 1. Chicken Rice\tRM8\n 2. Ginger Fish With Brown Rice\tRM12\n 3. Chicken Croissant\tRM6\n 4. Nasi Lemak\tRM4\n 5. Fish Fillet With Brown Rice\tRM9\n 6. Apple Juice\tRM3\n";
+    cout<<" 1. Chicken Rice\t\tRM 8\n 2. Ginger Fish With Brown Rice\tRM 12\n 3. Chicken Croissant\t\tRM 6\n 4. Nasi Lemak\t\t\tRM 4\n 5. Fish Fillet With Brown Rice\tRM 9\n 6. Apple Juice\t\t\tRM 3\n";
 }
 
 double Calc_fooddrink_charge(double fooddrink_charge, int counter, int &submenu_choice, double &amount)

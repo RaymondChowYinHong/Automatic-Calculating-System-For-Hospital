@@ -8,7 +8,7 @@ using namespace std;
 void display_hospitalstay_menu()
 {
     cout<<"Select your choice."<<endl;
-    cout<<" 1. ICU\tRM265\n 2. HDU\tRM185\n 3. Single Deluxe\tRM600\n 4. Single Standard\tRM300\n 5. Double Bedded\tRM160\n 6. 4-Bedded\tRM120\n";
+    cout<<" 1. ICU\t\t\tRM 265\n 2. HDU\t\t\tRM 185\n 3. Single Deluxe\tRM 600\n 4. Single Standard\tRM 300\n 5. Double Bedded\tRM 160\n 6. 4-Bedded\t\tRM 120\n";
 }
 
 double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &submenu_choice, double &amount)

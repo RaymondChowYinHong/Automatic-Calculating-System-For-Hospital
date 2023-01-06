@@ -7,7 +7,7 @@ using namespace std;
 void display_medcine_menu()
 {
     cout<<"Select your choice."<<endl;
-    cout<<" 1. Norvac(amlodipine)10 mg tablet \tRM8\n 2. Lipitor (atorvastatin)20 mg tablet \tRM7\n 3. Glucovance(metformin+glyburide) 5 mg tablet \tRM2\n 4. Diamicron(gliclazide)80 mg tablet \tRM1\n 5. Noten(atenolol)50 mg tablet \tRM0.50\n 6. Ventolin 2.5 mg dose \tRM4\n";
+    cout<<" 1. Norvac(amlodipine)10 mg tablet \t\t\tRM 8.00\n 2. Lipitor (atorvastatin)20 mg tablet \t\t\tRM 7.00\n 3. Glucovance(metformin+glyburide) 5 mg tablet \tRM 2.00\n 4. Diamicron(gliclazide)80 mg tablet \t\t\tRM 1.00\n 5. Noten(atenolol)50 mg tablet \t\t\tRM 0.50\n 6. Ventolin 2.5 mg dose \t\t\t\tRM 4.00\n";
 }
 
 double Calc_medcine_charge(double medcine_charge, int counter, int &submenu_choice, double &amount)

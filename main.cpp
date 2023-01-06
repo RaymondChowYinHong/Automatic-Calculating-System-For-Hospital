@@ -13,6 +13,21 @@
 #include "CalcTotalCharges.hpp"
 using namespace std;
 
+class Person
+{
+    public:
+        // int menu_choice;
+        // int submenu_choice;
+        // double amount;
+        double medcine_charge=0;
+        double surgery_charge=0;
+        double service_charge=0;
+        double hospitalstay_charge=0;
+        double fooddrink_charge=0;
+        double Total_Charge=0;
+
+};
+
 int main()
 {
     char new_patient = 'Y';
@@ -22,7 +37,9 @@ int main()
     {
         char exit_status = 'N';
 
-        double medcine_charge=0, surgery_charge=0, service_charge=0, hospitalstay_charge=0, fooddrink_charge=0, Total_Charge=0;
+        Person Patient;
+
+        // double medcine_charge=0, surgery_charge=0, service_charge=0, hospitalstay_charge=0, fooddrink_charge=0, Total_Charge=0;
 
         int counter = 0;
         int number_item;
@@ -69,7 +86,7 @@ int main()
                 case 1:
                     //medcine
                     menu_choice_array[counter] = menu_choice;
-                    medcine_charge = Calc_medcine_charge(medcine_charge, counter, submenu_choice, amount);
+                    Patient.medcine_charge = Calc_medcine_charge(Patient.medcine_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -79,7 +96,7 @@ int main()
                 case 2:
                     //surgery
                     menu_choice_array[counter] = menu_choice;
-                    surgery_charge = Calc_surgery_charge(surgery_charge, counter, submenu_choice, amount);
+                    Patient.surgery_charge = Calc_surgery_charge(Patient.surgery_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -89,7 +106,7 @@ int main()
                 case 3:
                     //service
                     menu_choice_array[counter] = menu_choice;
-                    service_charge = Calc_service_charge(service_charge, counter, submenu_choice, amount);
+                    Patient.service_charge = Calc_service_charge(Patient.service_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -99,7 +116,7 @@ int main()
                 case 4:
                     //hospital stay
                     menu_choice_array[counter] = menu_choice;
-                    hospitalstay_charge = Calc_hospitalstay_charge(hospitalstay_charge, counter, submenu_choice, amount);
+                    Patient.hospitalstay_charge = Calc_hospitalstay_charge(Patient.hospitalstay_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -109,7 +126,7 @@ int main()
                 case 5:
                     //food and drink
                     menu_choice_array[counter] = menu_choice;
-                    fooddrink_charge = Calc_fooddrink_charge(fooddrink_charge, counter, submenu_choice, amount);
+                    Patient.fooddrink_charge = Calc_fooddrink_charge(Patient.fooddrink_charge, counter, submenu_choice, amount);
                     submenu_choice_array[counter]= submenu_choice;
                     amount_array[counter] = amount;
                     //cout<<submenu_choice_array[counter]<<endl;
@@ -135,8 +152,8 @@ int main()
                         Display_patient_item(menu_choice, submenu_choice, amount, j);
                     }
 
-                    Total_Charge = Calc_Total_Charge(medcine_charge, surgery_charge, service_charge, hospitalstay_charge, fooddrink_charge);
-                    cout << "Total charges= RM"<< Total_Charge << endl;
+                    Patient.Total_Charge = Calc_Total_Charge(Patient.medcine_charge, Patient.surgery_charge, Patient.service_charge, Patient.hospitalstay_charge, Patient.fooddrink_charge);
+                    cout << "Total charges= RM"<< Patient.Total_Charge << endl;
                     cout << endl;
                     exit_status = 'Y';
                     break;
