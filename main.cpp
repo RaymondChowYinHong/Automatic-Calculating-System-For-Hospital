@@ -1,6 +1,6 @@
 // use class , array in class and capsulation
 //create funtion to store patient disease, charges, name and ID
-
+//fix the probelm 0.6 int become 0
 #include <iostream>
 #include "main.hpp"
 #include "mainmenu.hpp"
@@ -93,23 +93,24 @@ int main()
         // double medcine_charge=0, surgery_charge=0, service_charge=0, hospitalstay_charge=0, fooddrink_charge=0, Total_Charge=0;
 
         int counter = 0;
-        int number_item;
+        // int number_item;
 
-        do
-        {
-            if(cin.fail())
-            {
-                cin.clear();
-                cin.ignore();
-            }
+        // do
+        // {
+        //     if(cin.fail())
+        //     {
+        //         cin.clear();
+        //         cin.ignore();
+        //     }
             
-            cout << "How many item?"<<endl;
-            cin >> number_item;
-        } while (cin.fail());
+        //     cout << "How many item?"<<endl;
+        //     cin >> number_item;
+        // } while (cin.fail());
 
-        int menu_choice_array[number_item];
-        int submenu_choice_array[number_item];
-        double amount_array[number_item];
+        // int menu_choice_array[number_item];
+        int* menu_choice_array = new int[1];
+        int* submenu_choice_array = new int[1];
+        double* amount_array = new double[1];
    
 
 
@@ -133,6 +134,12 @@ int main()
             } while (cin.fail());
 
             int charge=0;
+
+            // if( menu_choice==1 || menu_choice == 2 || menu_choice == 3|| menu_choice==4|| menu_choice ==5)
+            // {
+            //     int size = counter+1;
+            //     int* menu_choice_array = new int[size];
+            // }
 
             switch(menu_choice)
             {
@@ -193,16 +200,16 @@ int main()
                     break;
                 case 6:
                     //Total charges
-                    if(number_item != (counter))
-                    {
-                        cout << "Amount of item selected is not equal to number of item stated." << endl;
-                        cout << "Current calculation of charges will be canceled." << endl;
-                        cout << endl;
-                        exit_status = 'Y';
-                        break;
-                    }
+                    // if(number_item != (counter))
+                    // {
+                    //     cout << "Amount of item selected is not equal to number of item stated." << endl;
+                    //     cout << "Current calculation of charges will be canceled." << endl;
+                    //     cout << endl;
+                    //     exit_status = 'Y';
+                    //     break;
+                    // }
 
-                    for(size_t j = 0; j < number_item; j++)
+                    for(size_t j = 0; j < counter; j++)
                     {
                         menu_choice = menu_choice_array[j];
                         submenu_choice = submenu_choice_array[j];
@@ -219,9 +226,69 @@ int main()
                 default:
                     cout<<"Select item on the menu only."<<endl;
                     break;
+
+            
+            if( menu_choice==1 || menu_choice == 2 || menu_choice == 3|| menu_choice==4|| menu_choice ==5)
+            {
+                int size = counter;
+                int* tempo_menu_choice_array = new int[size];
+
+                for(size_t i =0; i<counter ;i++)
+                {
+                    tempo_menu_choice_array[i] = menu_choice_array[i];
+                }
+
+                delete [] menu_choice_array;
+
+                menu_choice_array = tempo_menu_choice_array;
+
+                tempo_menu_choice_array = NULL;
+                
+            }
+
+            if( menu_choice==1 || menu_choice == 2 || menu_choice == 3|| menu_choice==4|| menu_choice ==5)
+            {
+                int size = counter;
+                int* tempo_submenu_choice_array = new int[size];
+
+                for(size_t i =0; i<counter ;i++)
+                {
+                    tempo_submenu_choice_array[i] = submenu_choice_array[i];
+                }
+
+                delete [] submenu_choice_array;
+
+                menu_choice_array = tempo_submenu_choice_array;
+
+                tempo_submenu_choice_array = NULL;
+                
+            }
+
+            if( menu_choice==1 || menu_choice == 2 || menu_choice == 3|| menu_choice==4|| menu_choice ==5)
+            {
+                int size = counter;
+                double* tempo_amount_array = new double[size];
+
+                for(size_t i =0; i<counter ;i++)
+                {
+                    tempo_amount_array[i] = amount_array[i];
+                }
+
+                delete [] amount_array;
+
+                amount_array = tempo_amount_array;
+
+                tempo_amount_array = NULL;
+                
+            }
+
             }
 
         }while(exit_status!='Y' || cin.fail());
+
+        delete []menu_choice_array;
+        delete []submenu_choice_array;
+        delete []amount_array;
 
         do{
 
