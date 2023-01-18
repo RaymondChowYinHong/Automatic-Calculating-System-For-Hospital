@@ -14,7 +14,7 @@ void display_hospitalstay_menu()
 double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &submenu_choice, double &amount)
 {
     int hospitalstay_choice;
-    int amount_hospitalstay;
+    double amount_hospitalstay;
 
     do
     {
@@ -51,9 +51,10 @@ double Calc_hospitalstay_charge(double hospitalstay_charge, int counter, int &su
             {
                 cout << "Enter again."<<endl;
             }
+
     } while (amount_hospitalstay <0 || cin.fail());
 
-    double frequency = static_cast<double>(amount_hospitalstay);
+    double frequency = amount_hospitalstay;
     amount = frequency;
             
     switch(hospitalstay_choice)
