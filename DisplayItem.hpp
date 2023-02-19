@@ -1,10 +1,16 @@
+/* Programmer's info for making this hpp file */
+//Name: Raymond Chow Yin Hong
+//USM Email: raymondchow@student.usm.my
+//GitHub Username: RaymondChowYinHong
+//Matric No.: 165011
+
 #ifndef DISPLAYITEM_HPP
 #define DISPLAYITEM_HPP
 
 #include <iostream>
 using namespace std;
 
-
+/* Function Purpose  : To list out all the items purchased by patient    */
 void Display_patient_item(int menu_choice, int submenu_choice, double amount, size_t j )
 {
     if(menu_choice == 1)
